@@ -1,4 +1,4 @@
-module ginx
+module github.com/chongyanovo/ginx
 
 go 1.22
 
