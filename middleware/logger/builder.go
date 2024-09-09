@@ -3,6 +3,7 @@ package logger
 import (
 	"bytes"
 	"context"
+	"github.com/chongyanovo/zkit/option"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/atomic"
 	"io"
@@ -29,10 +30,11 @@ func NewBuilder(loggerFunc func(ctx context.Context, log *AccessLog)) *MiddleWar
 	}
 }
 
-// AllowRequestBody 允许打印请求体
-func (b *MiddleWareBuilder) AllowRequestBody(flag bool) *MiddleWareBuilder {
-	b.allowRequestBody.Store(flag)
-	return b
+// WithAllowRequestBody 允许打印请求体
+func (b *MiddleWareBuilder) WithAllowRequestBody(flag bool) option.Option[MiddleWareBuilder] {
+	return func(b *MiddleWareBuilder) {
+		b.allowRequestBody.Store(flag)
+	}
 }
 
 // AllowResponseBody 允许打印响应体
