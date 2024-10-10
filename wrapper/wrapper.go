@@ -24,7 +24,7 @@ func WrapperBody[T any](l *zap.Logger, fn func(ctx *gin.Context, req T) (result.
 		ctx.JSON(http.StatusOK, res)
 	}
 }
-func WrapperBodyWitJwt[T any](l *zap.Logger, fn func(ctx *gin.Context, req T, uc *jwt.UserClaims) (result.Result, error)) gin.HandlerFunc {
+func WrapperBodyWithJwt[T any](l *zap.Logger, fn func(ctx *gin.Context, req T, uc *jwt.UserClaims) (result.Result, error)) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var req T
 		if err := ctx.Bind(&req); err != nil {
